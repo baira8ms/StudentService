@@ -1,2 +1,2 @@
 echo "Hello world"
-gradlew clean build
+./gradlew clean build
