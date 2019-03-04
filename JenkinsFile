@@ -1,29 +1,31 @@
 pipeline {
-print "Hello world"
   agent any
   stages {
-    stage("Build") {
-    steps{
-      print 'Build' 
-      if(isUnix()){
-        sh 'gradle build --info'
+      stage("Build") {
+      steps{
+        print 'Build' 
+        if(isUnix()){
+          sh 'gradle build --info'
+          }
+          else{
+            bat 'gradle build --info'
+          }
+          }
         }
-        else{
-          bat 'gradle build --info'
-        }
+
+    stage("Checkpoint") {
+          steps{
+          checkpoint 'Completed Build'
         }
       }
-      stage("Checkpoint") {
-        steps{
-        checkpoint 'Completed Build'
-      }
-    }
-      stage("Deploying"){
+
+stage("Deploying"){
        steps
        {
        print 'Deploying'
         bat 'gradle uploadArchives --info'
       }
      }
-  }
+
+}
 }
