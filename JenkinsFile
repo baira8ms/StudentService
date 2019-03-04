@@ -4,12 +4,9 @@ pipeline {
       stage("Build") {
       steps{
         print 'Build' 
-        if(isUnix()){
-          sh 'gradle build --info'
-          }
-          else{
+      
             bat 'gradle build --info'
-          }
+          
           }
         }
 
