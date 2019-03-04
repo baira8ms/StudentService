@@ -12,15 +12,14 @@ echo "Hello world"
         }
       }
       stage("Checkpoint") {
-      steps {
+     
         checkpoint 'Completed Build'
-      }
+      
     }
       stage("Deploying"){
-        steps{
-        echo 'Deploying'
+              echo 'Deploying'
         bat 'gradle uploadArchives --info'
-      }
+      
      }
   }
 }
