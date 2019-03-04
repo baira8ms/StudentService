@@ -1,11 +1,26 @@
+pipeline {
 echo "Hello world"
-stage 'build_Project'
-node{
-  if(isUnix()){
-  sh 'gradle build --info'
-
-  }
-  else{
-    bat 'gradle build --info'
+  agent any
+  stages {
+    stage("Build") {
+      echo 'Build' 
+      if(isUnix()){
+        sh 'gradle build --info'
+        }
+        else{
+          bat 'gradle build --info'
+        }
+      }
+      stage("Checkpoint") {
+      steps {
+        checkpoint 'Completed Build'
+      }
+    }
+      stage("Deploying"){
+        steps{
+        echo 'Deploying'
+        bat 'gradle uploadArchives --info'
+      }
+     }
   }
 }
