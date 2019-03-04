@@ -3,6 +3,7 @@ print "Hello world"
   agent any
   stages {
     stage("Build") {
+    steps{
       print 'Build' 
       if(isUnix()){
         sh 'gradle build --info'
@@ -10,16 +11,19 @@ print "Hello world"
         else{
           bat 'gradle build --info'
         }
+        }
       }
       stage("Checkpoint") {
-     
+        steps{
         checkpoint 'Completed Build'
-      
+      }
     }
       stage("Deploying"){
-              print 'Deploying'
+       steps
+       {
+       print 'Deploying'
         bat 'gradle uploadArchives --info'
-      
+      }
      }
   }
 }
