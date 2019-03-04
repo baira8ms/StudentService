@@ -1,9 +1,9 @@
 pipeline {
-echo "Hello world"
+print "Hello world"
   agent any
   stages {
     stage("Build") {
-      echo 'Build' 
+      print 'Build' 
       if(isUnix()){
         sh 'gradle build --info'
         }
@@ -17,7 +17,7 @@ echo "Hello world"
       
     }
       stage("Deploying"){
-              echo 'Deploying'
+              print 'Deploying'
         bat 'gradle uploadArchives --info'
       
      }
